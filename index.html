@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Generate Random IDs</h1>
+    <label for="name">Enter Count:</label>
+    <input type="text" id="Count" name="Count">
+    <br>
+    <label for="name">Enter Reps:</label>
+    <input type="text" id="Reps" name="Reps">
+    <br>
+    <button onclick="generate()">GO!</button>
+    <br>
+    <pre id="export"></pre>
+    <table id = "output">
+      <tr>
+        <td>Output</td>
+      </tr>
+    </table>
+
+    <script>
+      function generate(){
+        num = document.getElementById('Count').value;
+        reps = document.getElementById('Reps').value;
+        //get urls/environment?
+        var hostname = "api.digitalvault.cloud";
+        //document.getElementById('export').innerHTML=num;
+        var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var retVal;
+        for (var j = 0; j < reps; j++){
+          retVal = "";
+          for (var i = 0, n = charset.length; i < num; i++){
+            retVal += charset.charAt(Math.floor(Math.random()*n));
+          }
+
+          updateTable(retVal);
+        }
+      }
+
+      function updateTable(thread){
+          var node = document.createElement("tr");
+          var textnode = document.createElement("td");
+          textnode.innerHTML=thread;
+          node.appendChild(textnode);
+          document.getElementById("output").appendChild(node);
+      }
+
+    </script>
+  </body>
+</html>
